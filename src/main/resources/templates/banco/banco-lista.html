@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title th:text="${titulo}"></title>
+</head>
+<body>
+
+	<h3 th:text="${titulo}"></h3>
+	<hr>
+	
+	<a th:href="@{/form-banco}"> Ingresar los datos de su banco </a>
+	
+	<br>
+	<table>
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Sucursal</th>
+				<th>Ubicacion</th>
+
+			</tr>
+		</thead>
+		<tbody>
+		<p th:if="${banco.isEmpty()}"> No hay datos sobre el banco </p>
+		<tr th:each="banco: ${bancos}"></tr>
+		<tr th:each="banco: ${bancos}">
+			<td th:text="${banco.getId()}"></td>
+			<td th:text="${tarjeta.getSucursal()}"></td>
+			<td th:text="${tarjeta.getUbicacion()}"></td>
+		</tr>
+		</tbody>
+	</table>
+</body>
+</html>
