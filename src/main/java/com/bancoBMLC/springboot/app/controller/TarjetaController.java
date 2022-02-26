@@ -45,7 +45,7 @@ public class TarjetaController {
 		List<Cuenta> listaCuentas = cuentaDao.findAll();
 		model.put("tarjeta", tarjeta);
 		modelList.addAttribute("listaCuentas", listaCuentas);
-		model.put("titulo", "Llenar los datos de una tarjeta");
+		model.put("titulo", "Nueva Tarjeta");
 		return "form-tarjeta";
 	}
 	
@@ -56,7 +56,7 @@ public class TarjetaController {
 		if(id>0){
 			tarjeta = tarjetaDao.findOne(id);
 		} else {
-			return "redirect:/index";
+			return "redirect:/tarjetas-lista";
 		}
 		model.put("tarjeta", tarjeta);
 		model.put("titulo", tarjeta);
@@ -64,7 +64,7 @@ public class TarjetaController {
 		return "form-tarjeta";
 	}
 	
-	@RequestMapping(value = "/formtarjeta", method = RequestMethod.POST)
+	@RequestMapping(value = "/form-tarjeta", method = RequestMethod.POST)
 	public String guardar(@Valid Tarjeta tarjeta, BindingResult result, Model model, SessionStatus status, RedirectAttributes flash){
 		if(result.hasErrors()) {
 			model.addAttribute("titulo", "Llene correctamente los campos");
@@ -85,7 +85,7 @@ public class TarjetaController {
 		}
 		status.setComplete();
 		
-		return "redirect:form-tarjeta";
+		return "redirect:/form-tarjeta";
 	}
 	
 	@RequestMapping(value = "/eliminar/{id}")
@@ -93,6 +93,6 @@ public class TarjetaController {
 		if(id>0) {
 			tarjetaDao.delete(id);
 		}
-		return "redirect:index";
+		return "redirect:/tarjetas-lista";
 	}
 }

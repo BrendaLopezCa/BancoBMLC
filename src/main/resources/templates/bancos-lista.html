@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title th:text="${titulo}"></title>
+<link href="../static/css/layout.css" th:href="@{/css/Layout.css}" 
+		rel="stylesheet"/>
+</head>
+
+<body>
+	<h1 th:text="${titulo}"></h1>
+	<br>
+	<p th:text="${mensaje}"></p>
+	<br>
+	
+<p class="msjAdvertencia" th:if="${result}" th:text="${mensaje}"></p>
+<br>
+	
+	<table>
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Sucursal</th>
+				<th>Ubicacion</th>
+
+			</tr>
+		</thead>
+		<tbody>
+			<p class="msjAdvertencia" th:if="${bancos.isEmpty()}"> No hay datos sobre el banco</p>
+			<tr th:each="banco: ${bancos}"></tr>
+			<tr th:each="banco: ${bancos}">
+				<td th:text="${banco.getId()}"></td>
+				<td th:text="${banco.getSucursal()}"></td>
+				<td th:text="${banco.getUbicacion()}"></td>
+				<td><a class= "btnEditar" th:href="@{/form-banco/} + ${banco.getId()}" th:text="'Editar'" ></a></td>
+				<td><a class= "btnEliminar" th:href="@{/eliminarbanco/} + ${banco.getId()}" th:text="'Eliminar'" onclick="return confirm('¿Desea eliminar los datos del banco?');"></a></td>
+		</tr>
+		</tbody>
+		<a th:href="@{/form-banco}">Agregar nuevo banco</a>
+	</table>
+</body>
+</html>

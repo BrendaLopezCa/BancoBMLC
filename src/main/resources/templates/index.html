@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Proyecto Banco CDIS</title>
+<link href="../static/css/layout.css" th:href="@{/css/Layout.css}" 
+		rel="stylesheet"/>
 </head>
 <body>
 
-	<h3 th:text="${titulo}">Proyecto Banco</h3>
-	<a href="form-tarjeta">Lista de tarjetas</a>
+	<h3>Aplicacion Banco</h3>
+	<p class="centrar"><img th:src="@{/images/logocdis.jpg}"></p>
 	<br>
+	<a href="tarjetas-lista">Lista de tarjetas</a>
 	<br>
-	<a href="form-cuenta">Lista de cuentas</a>
-	
+	<a href="cuentas-lista">Lista de cuentas</a>
+	<br>
+	<a href="bancos-lista">Lista de bancos</a>
+
 </body>
 </html>

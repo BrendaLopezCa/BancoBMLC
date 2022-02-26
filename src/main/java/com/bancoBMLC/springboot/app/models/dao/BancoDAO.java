@@ -8,4 +8,8 @@ public interface BancoDAO {
 	public List<Banco> findAll();
 	
 	public void save(Banco banco);
+
+	public Banco findOne(Long id);
+	
+	public void delete(Long id);
 }

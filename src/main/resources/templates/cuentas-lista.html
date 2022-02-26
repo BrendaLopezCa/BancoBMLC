@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="${titulo}"></title>
+<link href="../static/css/layout.css" th:href="@{/css/Layout.css}" 
+		rel="stylesheet"/>
+</head>
+
+<body>
+	<h1 th:text="${titulo}"></h1>
+	<br>
+	<p th:text="${mensaje}"></p>
+	<br>
+
+
+<p class="msjAdvertencia" th:if="${result}" th:text="${mensaje}"></p>
+<br>
+
+
+<table>
+	<thead>
+		<tr>
+			<th>ID </th>
+			<th>Nombre </th>
+			<th>Numero de Cuenta </th>
+			<th>Saldo actual </th>
+			<th>Dia de creacion </th>
+		</tr>
+	</thead>
+	<tbody>
+		<p class="msjAdvertencia" th:if="${cuentas.isEmpty()}">La lista de cuentas está vacía</p>
+		<tr th:each="cuenta: ${cuentas}"></tr>
+		<tr th:each="cuenta: ${cuentas}">
+			<td th:text="${cuenta.getId()}"></td>
+			<td th:text="${cuenta.getNombre()}"></td>
+			<td th:text="${cuenta.getNumeroDeCuenta()}"></td>
+			<td th:text="${cuenta.getSaldoActual()}"></td>
+			<td th:text="${cuenta.getDiaCreacion()}"></td>
+			<td><a class= "btnEditar" th:href="@{/form-cuenta/} + ${cuenta.getId()}" th:text="'Editar'" ></a></td>
+			<td><a class= "btnEliminar" th:href="@{/eliminarcuenta/} + ${cuenta.getId()}" th:text="'Eliminar'" onclick="return confirm('¿Desea eliminar la cuenta?');"></a></td>
+		</tr>
+	</tbody>
+	<a th:href="@{/form-cuenta}">Agregar nueva cuenta</a>
+</table>
+</body>
+</html>

@@ -1,27 +1,28 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="https://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8"/>
-<title th:text="${titulo}">Insert title here</title>
+<title th:text="${titulo}">Cuenta</title>
+<link href="../static/css/layout.css" th:href="@{/css/Layout.css}" 
+		rel="stylesheet"/>
 </head>
 <body>
-	<hr3 th:text="${titulo}"></hr3>
+	<h3 th:text="${titulo}"></h3>
 
 	<tbody>
 		<p th:if="${result}" th:text="${mensaje}"></p>
 		<p th:if="${result}" th:each="err : ${errList}">
-			<span th:text="$err"></span>
+			<span th:text="${err}"></span>
 		</p>
 		<div>
 			<form th:action="@{/form-cuenta}" th:object="${cuenta}" method="post">
 				<table>
 					<tr>
-					<tr>
-					</tr>
-						<td>Nombre del cliente</td>
+						<td>Nombre</td>
 						<td><input type="text" th:field="*{nombre}"></td>
 						<div th:if="${#fields.hasErrors('nombre')}" th:errors"*{nombre}"></div>
 					</tr>
+					<tr>
 						<td>Numero de cuenta</td>
 						<td><input type="text" th:field="*{numeroDeCuenta}"></td>
 					</tr>
@@ -30,15 +31,21 @@
 						<td><input type="text" th:field="*{numeroTelefono}"></td>
 						<div th:if="${#fields.hasErrors('numeroTelefono')}" th:errors"*{numeroTelefono}"></div>
 					</tr>
+					<tr>
+						<td>Fecha actual</td>
+						<td><input type="date" th:field="*{diaCreacion}"></td>
 					</tr>
-						<td>Fecha actual (yyyy-mm-dd)</td>
-						<td><input type="text" th:field="*{diaCreacion}"></td>
+					<tr>
+						<td>Saldo de la cuenta</td>
+						<td><input type="number" th:field="*{saldoActual}"></td>
 					</tr>
 				</table>
 				
-				<br><input type="submit" value="Registrar cuenta "/>
+				<br><input type="submit" value="Registrar cuenta"/>
 			</form>
 		</div>
 	</tbody>
+	<br><a th:href="@{/cuentas-lista}">Lista de cuentas</a>
+	<br><a th:href="@{/}">Volver al inicio</a>
 </body>
 </html>

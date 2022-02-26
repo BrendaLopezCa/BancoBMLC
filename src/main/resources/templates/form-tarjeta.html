@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title th:text="${titulo}">Tarjeta</title>
+<link href="../static/css/layout.css" th:href="@{/css/Layout.css}" 
+		rel="stylesheet"/>
+</head>
+<body>
+	<h3 th:text="${titulo}"></h3>
+
+	<tbody>
+		<p th:if="${result}" th:text="${mensaje}"></p>
+		<p th:if="${result}" th:each="err : ${errList}">
+			<span th:text="${err}"></span>
+		</p>
+		<div>
+			<form th:action="@{/form-tarjeta}" th:object="${tarjeta}" method="post">
+				<table>
+					<tr>
+						<td>Nombre</td>
+						<td><input type="text" th:field="*{nombre}"></td>
+						<div th:if="${#fields.hasErrors('nombre')}" th:errors"*{nombre}"></div>
+					</tr>
+					<tr>
+						<td>Numero de tarjeta</td>
+						<td><input type="text" th:field="*{numeroTarjeta}"></td>
+					</tr>
+					<tr>
+						<td>ICV</td>
+						<td><input type="text" th:field="*{icv}"></td>
+						<div th:if="${#fields.hasErrors('icv')}" th:errors"*{icv}"></div>
+					</tr>
+				</table>
+				
+				<br><input type="submit" value="Registrar tarjeta"/>
+			</form>
+		</div>
+	</tbody>
+	<br><a th:href="@{/tarjetas-lista}">Lista de tarjetas</a>
+	<br><a th:href="@{/}">Volver al inicio</a>
+</body>
+</html>

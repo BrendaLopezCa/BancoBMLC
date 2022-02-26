@@ -26,7 +26,21 @@ public class BancoDAOImpl implements BancoDAO {
 	@Override
 	@Transactional
 	public void save(Banco banco) {
-
+		if(banco.getId() != null && banco.getId() > 0) {
+			em.merge(banco);
+		} else {
+			em.persist(banco);
+		}
 	}
 
+	@Override
+	public Banco findOne(Long id) {
+		return em.find(Banco.class, id);
+	}
+
+	@Override
+	@Transactional
+	public void delete(Long id) {
+		em.remove(findOne(id));
+	}
 }

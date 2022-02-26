@@ -16,7 +16,6 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import com.bancoBMLC.springboot.app.models.dao.CuentaDAO;
 import com.bancoBMLC.springboot.app.models.entity.Cuenta;
-import com.bancoBMLC.springboot.app.models.entity.Tarjeta;
 import com.bancoBMLC.springboot.app.validator.CuentaValidator;
 
 @Controller
@@ -30,29 +29,29 @@ public class CuentaController {
 	private CuentaValidator cuentaValidator;
 
 	
-	@RequestMapping(value="/lista", method = RequestMethod.GET)
+	@RequestMapping(value="/cuentas-lista", method = RequestMethod.GET)
 	public String cuentaLista(Model model) {
 		model.addAttribute("titulo", "Lista de cuentas");
 		model.addAttribute("cuentas", cuentaDao.findAll());
-		return "lista";
+		return "cuentas-lista";
 	}
 	
 	@RequestMapping(value = "form-cuenta")
 	public String crear(Map<String, Object> model) {
 		Cuenta cuenta = new Cuenta();
 		model.put("cuenta", cuenta);
-		model.put("titulo", "Nueva cuenta, llene los datos");
+		model.put("titulo", "Nueva Cuenta");
 		return "form-cuenta";
 	}
 	
 	@RequestMapping(value = "/form-cuenta/{id}")
 	public String editar(@PathVariable(value="id") Long id, Map<String, Object> model) {
-		Tarjeta cuenta = null;
+		Cuenta cuenta = null;
 		
 		if(id>0){
 			cuenta = cuentaDao.findOne(id);
 		} else {
-			return "redirect:/lista";
+			return "redirect:/cuentas-lista";
 		}
 		model.put("cuenta", cuenta);
 		model.put("titulo", "Edite la cuenta");
@@ -73,7 +72,7 @@ public class CuentaController {
 		}
 		cuentaDao.save(cuenta);
 		status.setComplete();
-		return "redirect:index";
+		return "redirect:/form-cuenta";
 	}
 	
 	@RequestMapping(value = "/eliminarcuenta/{id}")
@@ -81,7 +80,7 @@ public class CuentaController {
 		if(id>0) {
 			cuentaDao.delete(id);
 		}
-		return "redirect:index";
+		return "redirect:/cuentas-lista";
 	}
 	
 }

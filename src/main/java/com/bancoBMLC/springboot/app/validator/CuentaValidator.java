@@ -22,12 +22,14 @@ public class CuentaValidator implements Validator {
 		Cuenta cuenta = (Cuenta)target;
 		
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nombre", "NotEmpty.cuenta.nombre");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "numeroTelefono", "NotEmpty.cuenta.numeroTelefono");
 		
-		if(!cuenta.getNombre().matches("[a-z,A-Z]{1,15}?[]?[a-z,A-Z]{1,15}")) {
+		
+		if(! cuenta.getNombre().matches("(\\b[A-Z]{1}[a-z]+)( )([A-Z]{1}[a-z]+\\b)")) {
 			errors.rejectValue("nombre", "format.cuenta.nombre");
 		}
 		
-		if(!cuenta.getNumeroTelefono().matches("[0-9]{10}")) {
+		if(! cuenta.getNumeroTelefono().matches("^\\d{10}$")) {
 			errors.rejectValue("numeroTelefono", "format.cuenta.numeroTelefono");
 		}
 	}

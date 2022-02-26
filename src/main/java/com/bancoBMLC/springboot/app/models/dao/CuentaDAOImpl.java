@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bancoBMLC.springboot.app.models.entity.Cuenta;
-import com.bancoBMLC.springboot.app.models.entity.Tarjeta;
 
 @Repository
 public class CuentaDAOImpl implements CuentaDAO {
@@ -35,11 +34,12 @@ public class CuentaDAOImpl implements CuentaDAO {
 	}
 
 	@Override
-	public Tarjeta findOne(Long id) {
-		return em.find(Tarjeta.class, id);
+	public Cuenta findOne(Long id) {
+		return em.find(Cuenta.class, id);
 	}
 
 	@Override
+	@Transactional
 	public void delete(Long id) {
 		em.remove(findOne(id));
 	}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title th:text="${titulo}">Banco</title>
+<link href="../static/css/layout.css" th:href="@{/css/Layout.css}" 
+		rel="stylesheet"/>
+</head>
+<body>
+	<h3 th:text="${titulo}"></h3>
+
+	<tbody>
+		<p th:if="${result}" th:text="${mensaje}"></p>
+		<p th:if="${result}" th:each="err : ${errList}">
+			<span th:text="${err}"></span>
+		</p>
+		<div>
+			<form th:action="@{/form-banco}" th:object="${banco}" method="post">
+				<table>
+					<tr>
+						<td>Sucursal</td>
+						<td><input type="text" th:field="*{sucursal}"></td>
+					</tr>
+					<tr>
+						<td>Ubicacion</td>
+						<td><input type="text" th:field="*{ubicacion}"></td>
+					</tr>
+				</table>
+				
+				<br><input type="submit" value="Registrar banco"/>
+			</form>
+		</div>
+	</tbody>
+	<br><a th:href="@{/bancos-lista}">Lista de bancos</a>
+	<br><a th:href="@{/}">Volver al inicio</a>
+</body>
+</html>
